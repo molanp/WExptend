@@ -27,6 +27,8 @@ git https://github.com/molanp/WExptendFramework.git
 python main.py
 ```
 
+后期计划是像nonebot那样可以指定插件文件夹之类的
+
 ## 文档
 
 欲了解更多信息，请查看完整文档：
