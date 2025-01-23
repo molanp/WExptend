@@ -18,25 +18,24 @@ def action(name):
         return func
     return wrapper
 
-def before(action_name):
-    def wrapper(func):
-        if not hasattr(plugin_registry, "before_hooks"):
-            plugin_registry.before_hooks = {}
-        if action_name not in plugin_registry.before_hooks:
-            plugin_registry.before_hooks[action_name] = []
-        plugin_registry.before_hooks[action_name].append(func)
-        return func
-    return wrapper
+class Plugin:
+    def before(self, action_name):
+        def wrapper(func):
+            if action_name not in plugin_registry.before_hooks:
+                plugin_registry.before_hooks[action_name] = []
+            plugin_registry.before_hooks[action_name].append(func)
+            return func
+        return wrapper
+    
+    def after(self, action_name):
+        def wrapper(func):
+            if action_name not in plugin_registry.after_hooks:
+                plugin_registry.after_hooks[action_name] = []
+            plugin_registry.after_hooks[action_name].append(func)
+            return func
+        return wrapper
 
-def after(action_name):
-    def wrapper(func):
-        if not hasattr(plugin_registry, "after_hooks"):
-            plugin_registry.after_hooks = {}
-        if action_name not in plugin_registry.after_hooks:
-            plugin_registry.after_hooks[action_name] = []
-        plugin_registry.after_hooks[action_name].append(func)
-        return func
-    return wrapper
+plugin = Plugin()
 
 class action_registry:
     actions = {}
