@@ -1,0 +1,2 @@
+recursive-include WExptend *
+recursive-exclude WExptend __pycache__
