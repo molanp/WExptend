@@ -1,6 +1,0 @@
-{
-  "API_PATH": "apis",
-  "PLUGIN_PATH": "plugins",
-  "HOST": "localhost",
-  "PORT": 8765
-}

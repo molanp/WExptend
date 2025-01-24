@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "WExptend"
+version = "0.1.0"
+description = "A highly scalable websockets server framework."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+  { name="molanp", email="molanpp@outlook.com" }
+]
+
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+]
+
+dependencies = [
+  "numpy>=1.18.0",
+  "pandas>=1.0.0",
+  "websockets",
+"colorama",
+"ujson",
+"aiohttp",
+"python-dotenv",
+"watchdog"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/molanp/WExptend"
+"Bug Tracker" = "https://github.com/molanp/WExptend/issues"
+
+[tool.setuptools.packages.find]
+where = ["WExptend"]
+
+[tool.setuptools.package-data]
+"*" = ["*.*"]
