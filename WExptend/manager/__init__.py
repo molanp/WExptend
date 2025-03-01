@@ -4,19 +4,17 @@ from WExptend.manager.plugin import PluginLoader
 from WExptend.manager.router import RouterLoader
 from WExptend.log import logger
 
+
 class HotReloadHandler(FileSystemEventHandler):
     def __init__(self, server):
         self.server = server
 
     def on_modified(self, event):
-        """ 文件修改时触发热重载 """
-        if event.src_path.endswith(".py"): # type: ignore
-            logger.trace(f"File changed: {event.src_path}")
-            self.server.reload_plugins()
-            self.server.reload_routers()
-        elif event.src_path == self.server.config_file:
-            logger.trace(f"Config file changed: {event.src_path}")
-            self.server.reload_config()
+        if str(event.src_path).endswith(".py"):
+            logger.trace(f"Detected file change: {event.src_path}")
+            PluginLoader.reload_plugins()
+            RouterLoader.reload_routers()
+
 
 class HotReloadServer:
     def __init__(self):
@@ -27,6 +25,8 @@ class HotReloadServer:
 
     def load_plugins(self, path: str):
         """加载插件并将文件夹加入监听列表"""
+        if path in self.plugin_paths:
+            return
         PluginLoader.load_plugins(path)
         self.plugin_paths.add(path)
         self.observer.schedule(HotReloadHandler(self), path, recursive=True)
@@ -37,6 +37,8 @@ class HotReloadServer:
 
     def load_routers(self, path: str):
         """加载路由并将文件夹加入监听列表"""
+        if path in self.router_paths:  # 新增判断
+            return
         RouterLoader.load_routers(path)
         self.router_paths.add(path)
         self.observer.schedule(HotReloadHandler(self), path, recursive=True)

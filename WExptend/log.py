@@ -13,16 +13,20 @@ SUCCESS_LOG_LEVEL = 25
 logging.addLevelName(TRACE_LOG_LEVEL, "TRACE")
 logging.addLevelName(SUCCESS_LOG_LEVEL, "SUCCESS")
 
+
 def trace(self, message, *args, **kws):
     if self.isEnabledFor(TRACE_LOG_LEVEL):
         self._log(TRACE_LOG_LEVEL, message, args, **kws)
+
 
 def success(self, message, *args, **kws):
     if self.isEnabledFor(SUCCESS_LOG_LEVEL):
         self._log(SUCCESS_LOG_LEVEL, message, args, **kws)
 
-logging.Logger.trace = trace # type: ignore
-logging.Logger.success = success # type: ignore
+
+logging.Logger.trace = trace  # type: ignore
+logging.Logger.success = success  # type: ignore
+
 
 def get_log_level() -> int:
     """根据日志名称获取日志级别"""
@@ -36,6 +40,7 @@ def get_log_level() -> int:
         "CRITICAL": logging.CRITICAL,
     }
     return maps.get(Config.get("LOG_LEVEL", "INFO").upper(), logging.INFO)
+
 
 class CustomFormatter(logging.Formatter):
     def format(self, record):
@@ -56,8 +61,8 @@ class CustomFormatter(logging.Formatter):
         }
         return colors.get(level_name, Fore.WHITE)
 
-class logger:
 
+class logger:
     init(autoreset=True)
 
     console_log_level_int = TRACE_LOG_LEVEL
@@ -115,7 +120,7 @@ class logger:
     def trace(cls, *args) -> None:
         cls._ensure_log_file_created()
         with cls.lock:
-            cls.logger.trace(cls._format_message(*args)) # type: ignore
+            cls.logger.trace(cls._format_message(*args))  # type: ignore
 
     @classmethod
     def debug(cls, *args) -> None:
@@ -133,7 +138,7 @@ class logger:
     def success(cls, *args) -> None:
         cls._ensure_log_file_created()
         with cls.lock:
-            cls.logger.success(cls._format_message(*args)) # type: ignore
+            cls.logger.success(cls._format_message(*args))  # type: ignore
 
     @classmethod
     def warning(cls, *args) -> None:

@@ -1,6 +1,6 @@
 import traceback
-import sys
 from WExptend.log import logger
+
 
 async def handle_exception(e):
     error_message = str(e)
