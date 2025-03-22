@@ -1,4 +1,7 @@
 
+## [2025-03-22] - New Updates
+- [`eb37ad8`](eb37ad8c6e3c94b90db31e86544002bec73f8616) docs(README): 更新功能列表中的热重载状态
+
 ## [2025-03-01] - New Updates
 - [`7c32069`](7c32069ffd1cb4329172bc12388c263c137ee5e0) feat(core): 重构 WebEx 扩展框架
 
